@@ -24,5 +24,18 @@ def no10():
     print(subprocess.check_output(cmd, shell=True))
 
 
+# 11. タブをスペースに置換
+# タブ1文字につきスペース1文字に置換せよ．確認にはsedコマンド，trコマンド，もしくはexpandコマンドを用いよ．
+def no11():
+    with open(fname) as f:
+        text = f.read().replace('\t', ' ')
+        print(text)
+
+    # UNIX command
+    # sed -e "s/\t/ /g" hightemp.txt
+    # cat hightemp.txt | tr '\t' ' '
+    # expand -t 1 hightemp.txt
+
+
 if __name__ == '__main__':
-    no10()
+    no11()
