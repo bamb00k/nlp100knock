@@ -60,5 +60,27 @@ def no12():
     #             f_col2.write(row[1])
 
 
+# 13. col1.txtとcol2.txtをマージ
+# 12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目を
+# タブ区切りで並べたテキストファイルを作成せよ．確認にはpasteコマンドを用いよ．
+def no13():
+    import pandas as pd
+    df1 = pd.read_csv('col1.txt', '\t', header=None)
+    df2 = pd.read_csv('col2.txt', '\t', header=None)
+    df = pd.concat([df1, df2], axis=1)
+    df.to_csv('col_join.txt', '\t', index=False, header=None)
+
+    # Linuxコマンド
+    # $ paste col1.txt col2.txt > col_join.txt
+
+    # pandas を 使わないパターン
+    # f_col1 = open('col1.txt', 'r')
+    # f_col2 = open('col2.txt', 'r')
+    #
+    # with open('col_join.txt', 'w') as f:
+    #     for col1, col2 in zip(f_col1, f_col2):
+    #         f.write("{}\t{}\n".format(col1.rstrip(), col2.rstrip()))
+
+
 if __name__ == '__main__':
-    no12()
+    no13()
