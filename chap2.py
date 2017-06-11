@@ -111,5 +111,39 @@ def no14():
     # Linuxコマンド
     # $ head -N hightemp.txt
 
+
+# 15. 末尾のN行を出力
+# 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち末尾のN行だけを表示せよ．確認にはtailコマンドを用いよ．
+def no15():
+    import sys
+    import os
+
+    argv = sys.argv
+    if len(argv) < 2:
+        basename = os.path.basename(__file__)
+        print("Usage : python {} N".format(basename))
+        print("N is integer.")
+        exit()
+
+    try:
+        N = int(argv[1])
+    except Exception as e:
+        print(e)
+        exit()
+
+    with open(fname) as f:
+        length = len(f.readlines())
+        fp = 0 if length < N else length - N
+        f.seek(0)
+        for i in range(fp):
+            f.readline()
+
+        for i in range(N):
+            print(f.readline(), end='')
+
+    # Linuxコマンド
+    # $ tail -N hightemp.txt
+
+
 if __name__ == '__main__':
-    no14()
+    no15()
