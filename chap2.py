@@ -82,5 +82,34 @@ def no13():
     #         f.write("{}\t{}\n".format(col1.rstrip(), col2.rstrip()))
 
 
+# 14. 先頭からN行を出力
+# 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち先頭のN行だけを表示せよ．確認にはheadコマンドを用いよ．
+def no14():
+    import sys
+    import os
+
+    argv = sys.argv
+    if len(argv) < 2:
+        basename = os.path.basename(__file__)
+        print("Usage : python {} N".format(basename))
+        print("N is integer.")
+        exit()
+
+    try:
+        N = int(argv[1])
+    except Exception as e:
+        print(e)
+        exit()
+
+    with open(fname) as f:
+        length = len(f.readlines())
+        f.seek(0)
+        length = N if N < length else length
+        for i in range(length):
+            print(f.readline(), end='')
+
+    # Linuxコマンド
+    # $ head -5 hightemp.txt
+
 if __name__ == '__main__':
-    no13()
+    no14()
