@@ -109,7 +109,7 @@ def no14():
             print(f.readline(), end='')
 
     # Linuxコマンド
-    # $ head -5 hightemp.txt
+    # $ head -N hightemp.txt
 
 if __name__ == '__main__':
     no14()
