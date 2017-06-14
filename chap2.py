@@ -145,5 +145,45 @@ def no15():
     # $ tail -N hightemp.txt
 
 
+# 16. ファイルをN分割する
+# 自然数Nをコマンドライン引数などの手段で受け取り，入力のファイルを行単位でN分割せよ．同様の処理をsplitコマンドで実現せよ．
+def no16():
+    import sys
+    import os
+
+    argv = sys.argv
+    if len(argv) < 2:
+        basename = os.path.basename(__file__)
+        print("Usage : python {} N [outfile]".format(basename))
+        print("`N` is integer.")
+        print("`outfile` is the file name with output path.")
+        exit()
+
+    try:
+        N = int(argv[1])
+    except Exception as e:
+        print(e)
+        exit()
+
+    def make_out_path(i):
+        if len(argv) >= 3:
+            out = argv[2] + str(i)
+        else:
+            path, ext = os.path.splitext(fname)
+            out = path + '_' + str(i) + ext
+        return out
+
+    with open(fname) as f:
+        lines = f.readlines()
+        loop = int(len(lines) / N) + 1
+
+        for i in range(loop):
+            s = i * N
+            with open(make_out_path(i), 'w') as o:
+                o.writelines(lines[s:s+N])
+
+    # Linuxコマンド
+    # $ split -l N hightemp.txt temp_out.
+
 if __name__ == '__main__':
-    no15()
+    no16()
